@@ -76,6 +76,9 @@
     </script>
 
     <script type="text/javascript">
+
+      const CODE_SECRET = ['U', 'L', 'DR', 'UR', 'L', 'UL'];
+
       const DIRECTION = {
         'a,w': 'UL', 'w,a': 'UL',
         'd,w': 'UR', 'w,d': 'UR',
@@ -121,8 +124,9 @@
         if (userInput.length > 6) {
           userInput.shift();
         }
-        if (userInput.length === 6 && userInput.join(',') === ['U', 'L', 'DR', 'UR', 'L', 'UL'].join(',')) {
-          window.location.href = "https://hazelthecolor.github.io/secret.html";
+        
+        if (userInput.length === 6 && userInput.join(',') === CODE_SECRET.join(',')) {
+          window.location.href = "https://hazelthecolor.github.io/secret";
         }
       }
     </script>

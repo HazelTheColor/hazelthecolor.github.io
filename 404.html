@@ -6,6 +6,7 @@
       <link rel="icon" href="graphics/star.ico">
       <title>...?</title>
     </head>
+
     <style>
       body {
         background-color: #151515;
@@ -23,7 +24,27 @@
 	    }
     </style>
 
+    <script>
+      const path = window.location.pathname;
+      const segments = path.split('/').filter(Boolean);
+
+      const pageType = segments[0];
+      const slug = segments[1];
+
+      switch (pageType) {
+        case 'helper':
+          switchHelper(slug);
+          break;
+
+        default:
+          document.body.innerHTML = '<a href="https://deltarune.com/egg"><img src="graphics/tree.gif"></a>';
+      }
+
+      function switchHelper(slug) {
+        console.log("slug:", slug);
+      }
+    </script>
+
     <body>
-      <a href="https://deltarune.com/egg"><img src="graphics/tree.gif"></a>
     </body>
   </html>

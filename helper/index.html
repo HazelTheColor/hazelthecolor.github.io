@@ -23,13 +23,15 @@
     </style>
 
     <script>
-      const pathSegments = window.location.pathname.split('/').filter(Boolean);
-      const module = pathSegments[pathSegments.length - 1]; 
+      const urlParams = new URLSearchParams(window.location.search);
+      const slug = urlParams.get('slug');
 
-      document.getElementById("asdf").innerHTML = module;
+      if (slug) {
+        window.history.replaceState(null, '', `/blog/${slug}`);
+      }
     </script>
 
     <body>
-      <p id="asdf" class="text">asd</p>
+      <p id="asdf" class="text">test</p>
     </body>
   </html>

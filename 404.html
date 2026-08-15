@@ -25,26 +25,19 @@
     </style>
 
     <script>
-      const path = window.location.pathname;
-      const segments = path.split('/').filter(Boolean);
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      const matched = pathSegments[0] === 'helper';
 
-      const pageType = segments[0];
-      const slug = segments[1];
+      if (matched) {
+        const slug = pathSegments.slice(1).join('/');
+        window.location.replace(`/${matched}/?slug=${encodeURIComponent(slug)}`);
 
-      switch (pageType) {
-        case 'helper':
-          switchHelper(slug);
-          break;
-
-        default:
-          document.body.innerHTML = '<a href="https://deltarune.com/egg"><img src="graphics/tree.gif"></a>';
-      }
-
-      function switchHelper(slug) {
-        console.log("slug:", slug);
+      } else {
+        document.body.innerHTML = '<a href="https://deltarune.com/egg"><img src="graphics/tree.gif"></a>'
       }
     </script>
 
     <body>
+      <a href="https://deltarune.com/egg"><img src="graphics/tree.gif"></a>
     </body>
   </html>

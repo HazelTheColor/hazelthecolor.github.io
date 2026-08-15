@@ -1,15 +1,3 @@
-function carps(grid) {
-    return
+function carps() {
+    console.log('test');
 }
-
-const arr = [
-    [1, 2, 3, 1, 1, 1],
-    [1, 2, 3, 1, 1, 1],
-    [1, 2, 3, 1, 1, 1],
-    [1, 2, 3, 1, 1, 1],
-    [1, 2, 3, 1, 1, 1],
-    [1, 2, 3, 1, 1, 1],
-    [1, 2, 3, 1, 1, 1],
-    [1, 2, 3, 1, 1, 1]
-]
-console.log(carps(arr))

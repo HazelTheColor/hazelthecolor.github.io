@@ -26,11 +26,10 @@
 
     <script>
       const pathSegments = window.location.pathname.split('/').filter(Boolean);
-      const matched = pathSegments[0] === 'helper';
-
-      if (matched) {
+	
+      if (pathSegments[0] === 'helper') {
         const slug = pathSegments.slice(1).join('/');
-        window.location.replace(`/${matched}/?slug=${encodeURIComponent(slug)}`);
+        window.location.replace(`/helper/?slug=${encodeURIComponent(slug)}`);
 
       } else {
         document.body.innerHTML = '<a href="https://deltarune.com/egg"><img src="graphics/tree.gif"></a>'

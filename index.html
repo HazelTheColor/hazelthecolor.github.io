@@ -6,7 +6,7 @@
       <link rel="icon" href="graphics/star.ico">
       <title>owo</title>
     </head>
-    <style>
+    <style id="style">
       body {
         background-color: #151515;
         font-family: Helvetica;
@@ -42,9 +42,12 @@
       }
     </style>
 
-    <script type="text/javascript">
+    <script>
       // -- Dark/Light mode button
       var button="t";
+      const style = document.getElementById("style");
+      const sheet = style.sheet;
+
       function mode() {
         var btn1 = document.getElementById("btn");
         var bdv = document.getElementsByTagName("BODY")[0];
@@ -58,24 +61,19 @@
             button="t";
             dark()
           }
-        function light() {
-          const ltext = document.querySelectorAll(".text");
-          for (let a=0; a<ltext.length; a++) {
-            ltext[a].style.color="#151515";
-            bdv.style.backgroundColor="white";
-          }
-        }
-        function dark() {
-          const dtext = document.querySelectorAll(".text");
-          for (let b=0; b<dtext.length; b++) {
-            dtext[b].style.color="#cccccc";
-            bdv.style.backgroundColor="#151515";
-          }
-        }
+      }
+
+      function light() {
+        sheet.cssRules[0].style.backgroundColor = "white";
+        sheet.cssRules[1].style.color = "#151515"
+      }
+      function dark() {
+        sheet.cssRules[0].style.backgroundColor = "#151515";
+        sheet.cssRules[1].style.color = "#cccccc"
       }
     </script>
 
-    <script type="text/javascript">
+    <script>
 
       const CODE_SECRET = ['U', 'L', 'DR', 'UR', 'L', 'UL'];
 

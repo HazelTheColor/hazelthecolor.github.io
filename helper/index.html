@@ -9,7 +9,7 @@
       <script src="js/carps.js"></script>
     </head>
     
-    <style>
+    <style id="style">
       body {
         background-color: #151515;
         font-family: Helvetica;
@@ -29,11 +29,11 @@
       if (slug) {
         window.history.replaceState(null, '', `/helper/${slug}`);
       }
-
-      document.getElementById("asdf").innerHTML = slug;
     </script>
 
     <body>
-      <p id="asdf" class="text">test</p>
+      <script>
+        loadCarps();
+      </script>
     </body>
   </html>

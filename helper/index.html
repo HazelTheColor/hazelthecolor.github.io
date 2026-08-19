@@ -34,13 +34,15 @@
       if (slug) {
         window.history.replaceState(null, '', `/helper/${slug}`);
 
-        switch(slug) {
-          case "carps":
-            loadCarps();
-            break;
-          default:
-            window.location.href = "https://hazelthecolor.github.io/...?";
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+          switch(slug) {
+            case "carps":
+              loadCarps();
+              break;
+            default:
+              window.location.href = "https://hazelthecolor.github.io/...?";
+          }
+        });
       }
     </script>
 

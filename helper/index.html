@@ -6,7 +6,7 @@
       <link rel="icon" href="../graphics/star.ico">
       <title>sevenfour.ogg</title>
 
-      <script src="js/carps.js" defer></script>
+      <script src="js/carps.js"></script>
     </head>
     
     <style id="style">
@@ -34,15 +34,23 @@
       if (slug) {
         window.history.replaceState(null, '', `/helper/${slug}`);
 
-        document.addEventListener("DOMContentLoaded", () => {
+        const switchF = () => {
           switch(slug) {
+
             case "carps":
               loadCarps();
               break;
+            
             default:
               window.location.href = "https://hazelthecolor.github.io/...?";
           }
-        });
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", switchF);
+        } else {
+          switchF();
+        }
       }
     </script>
 

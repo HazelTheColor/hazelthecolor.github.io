@@ -15,6 +15,11 @@
         font-family: Helvetica;
         margin: 0;
         padding: 0;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100dvh;
       }
       
       .text {
@@ -29,19 +34,22 @@
       if (slug) {
         window.history.replaceState(null, '', `/helper/${slug}`);
       }
-
-      switch(slug) {
-        case "carps":
-          loadCarps();
-          break;
-        case "":
-          break;
-        default:
-          window.location.href = "https://hazelthecolor.github.io/...?";
-      }
     </script>
 
     <body>
-      <p>...hm</p>
+      <p class="text">hm?</p>
     </body>
+
+    <script>
+      if (slug) {
+        switch(slug) {
+          case "carps":
+            loadCarps();
+            break;
+          default:
+            window.location.href = "https://hazelthecolor.github.io/...?";
+        }
+      }
+    </script>
+
   </html>

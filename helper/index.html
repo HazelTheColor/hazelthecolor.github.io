@@ -6,7 +6,7 @@
       <link rel="icon" href="../graphics/star.ico">
       <title>sevenfour.ogg</title>
 
-      <script src="js/carps.js"></script>
+      <script src="js/carps.js" defer></script>
     </head>
     
     <style id="style">
@@ -33,15 +33,7 @@
 
       if (slug) {
         window.history.replaceState(null, '', `/helper/${slug}`);
-      }
-    </script>
 
-    <body>
-      <p class="text">hm?</p>
-    </body>
-
-    <script>
-      if (slug) {
         switch(slug) {
           case "carps":
             loadCarps();
@@ -52,4 +44,7 @@
       }
     </script>
 
+    <body>
+      <p class="text">hm?</p>
+    </body>
   </html>

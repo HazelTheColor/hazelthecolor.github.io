@@ -62,11 +62,13 @@ function loadPosRes() {
         font-size: 24px;
         text-align: center;
 
-        position: absolute;
-        margin: 0px;
-        width: auto;
-        height: 40px;
-        top: 450px;
+        position: relative;
+        width: 100vw;
+        margin-left: -50vw;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        left: 50%;
+        top: 200px;
       }
 
       #convert {
@@ -104,9 +106,9 @@ function loadPosRes() {
         <input id="base2" maxlength="4" placeholder="10">
         <input id="inputstring">
         <button id="convert" onclick="baseConvert()">(✿◠‿◠)</button>
+        <p id="output" class="text">:3</p>
         <button id="copy" onclick="copyText()"></button>
       </div>
-      <p id="output" class="text">:3</p>
     `
 }
 

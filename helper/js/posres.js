@@ -138,7 +138,7 @@ function baseConvert() {
         return;
     }
 
-    let n = 0;
+    let n = 0n;
     // converting from start to base10
     for (let i = 0; i < l; i++) {
 
@@ -147,26 +147,31 @@ function baseConvert() {
             return;
         }
 
-        val = symbols.indexOf(input[i]);
-        n += val * fromBase ** (l - 1 - i);
+        val = BigInt(symbols.indexOf(input[i]));
+        n = n * BigInt(fromBase) + val;
     }
 
     let out = "";
 
     //base1 check
     if (toBase === 1) {
-        out = '/'.repeat(n);
+        out = '/'.repeat(Number(n));
         document.getElementById("output").textContent = out;
         return;
     }
 
-    const logn = (x, y) => Math.log(x) / Math.log(y);
-    const m = Math.floor(logn(n, toBase) + 1);
-    // converting from base10 to end
-    for (let i = m-1; i >= 0; i--) {
-        let char = Math.trunc(n / (toBase ** i))
-        n -= (char * toBase ** i);
-        out += symbols[char];
+    if (n === 0n) {
+        out = "0";
+    } else {
+        const toBaseBI = BigInt(toBase);
+        let temp = n;
+        let digits = [];
+
+        while (temp > 0n) {
+          digits.push(symbols[Number(temp % toBaseBI)]);
+          temp = temp / toBaseBI;
+        }
+        out = digits.reverse().join('');
     }
 
     document.getElementById("output").textContent = out;

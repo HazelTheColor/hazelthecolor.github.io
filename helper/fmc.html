@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" href="../../graphics/star.ico">
+      <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Cousine'>
+      <title>sevenfour.ogg</title>
+    </head>
+    
+    <style id="style">
+      body {
+        background-color: #151515;
+        font-family: Helvetica;
+        margin: 0px;
+        padding: 0px;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100dvh;
+      }
+
+      input {
+        background-color: #2e295a;
+      }
+      
+      input:hover {
+        background-color: #35476a;
+      }
+
+      #read {
+        color: #cccccc;
+        font-size: 24px;
+        text-align: center;
+        text-transform: uppercase;
+
+        margin: 0px;
+        border: 2px solid #cccccc;
+        outline: none;
+        box-sizing: border-box;
+
+        position: absolute;
+        width: 500px;
+        height: 40px;
+        top: 100px;
+      }
+
+      #letters-div {
+        margin: auto;
+        padding: 0px;
+        display: flex;
+
+        width: 780px;
+        position: absolute;
+        top: 200px;
+      }
+
+      .letter {
+        color: #cccccc;
+        font-size: 20px;
+        text-align: center;
+        text-transform: uppercase;
+
+        margin: 0px;
+        border: 2px solid #cccccc;
+        outline: none;
+        box-sizing: border-box;
+
+        width: 30px;
+        height: 30px;
+        position: relative;
+      }
+
+      .letter::placeholder {
+        text-transform: lowercase;
+      }
+
+      #bg-text {
+        color: #5c618e;
+        font-size: 30px;
+        font-family: Cousine;
+        text-align: left;
+        line-height: 60px;
+
+        margin: 0px;
+        padding: 0px;
+        top: 320px;
+        width: 1081px;
+        position: absolute;
+      }
+    </style>
+    <body>
+      <input id="read">
+      <div id="letters-div">
+        <input class="letter" name="0" placeholder="a" maxlength="1">
+        <input class="letter" name="1" placeholder="b" maxlength="1">
+        <input class="letter" name="2" placeholder="c" maxlength="1">
+        <input class="letter" name="3" placeholder="d" maxlength="1">
+        <input class="letter" name="4" placeholder="e" maxlength="1">
+        <input class="letter" name="5" placeholder="f" maxlength="1">
+        <input class="letter" name="6" placeholder="g" maxlength="1">
+        <input class="letter" name="7" placeholder="h" maxlength="1">
+        <input class="letter" name="8" placeholder="i" maxlength="1">
+        <input class="letter" name="9" placeholder="j" maxlength="1">
+        <input class="letter" name="10" placeholder="k" maxlength="1">
+        <input class="letter" name="11" placeholder="l" maxlength="1">
+        <input class="letter" name="12" placeholder="m" maxlength="1">
+        <input class="letter" name="13" placeholder="n" maxlength="1">
+        <input class="letter" name="14" placeholder="o" maxlength="1">
+        <input class="letter" name="15" placeholder="p" maxlength="1">
+        <input class="letter" name="16" placeholder="q" maxlength="1">
+        <input class="letter" name="17" placeholder="r" maxlength="1">
+        <input class="letter" name="18" placeholder="s" maxlength="1">
+        <input class="letter" name="19" placeholder="t" maxlength="1">
+        <input class="letter" name="20" placeholder="u" maxlength="1">
+        <input class="letter" name="21" placeholder="v" maxlength="1">
+        <input class="letter" name="22" placeholder="w" maxlength="1">
+        <input class="letter" name="23" placeholder="x" maxlength="1">
+        <input class="letter" name="24" placeholder="y" maxlength="1">
+        <input class="letter" name="25" placeholder="z" maxlength="1">
+      </div>
+      <img src="../../graphics/fmc_alphabet.png" style="top: 230px; position: absolute">
+      <p id="bg-text"></p>
+    </body>
+    <script src="fmc.js"></script>
+  </html>

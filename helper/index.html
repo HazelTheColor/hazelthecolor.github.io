@@ -35,15 +35,20 @@
       if (slug) {
         window.history.replaceState(null, '', `/helper/${slug}`);
 
+        const slug_gen = slug.toLowerCase();
         const switchF = () => {
-          switch(slug) {
-
+          switch(slug_gen) {
             case "carps":
+            case "ca-rps":
               loadCarps();
               break;
             
             case "posres":
               loadPosRes();
+              break;
+            
+            case "fmc":
+              window.location.href = "https://hazelthecolor.github.io/helper/fmc";
               break;
             
             default:
@@ -61,6 +66,5 @@
 
     <body>
       <p class="text">hm?</p>
-      <script>loadPosRes()</script>
     </body>
   </html>

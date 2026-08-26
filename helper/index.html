@@ -33,25 +33,23 @@
         window.history.replaceState(null, '', `/helper/${slug}`);
 
         const slug_gen = slug.toLowerCase();
-        const switchF = () => {
-          switch(slug_gen) {
-            case "carps":
-            case "ca-rps":
-              window.location.href = "https://hazelthecolor.github.io/helper/carps";
-              break;
-            
-            case "posres":
-              window.location.href = "https://hazelthecolor.github.io/helper/posres";
-              break;
-            
-            case "fmc":
-              window.location.href = "https://hazelthecolor.github.io/helper/fmc";
-              break;
-            
-            default:
-              window.location.href = "https://hazelthecolor.github.io/...?";
-          }
-        };
+        switch(slug_gen) {
+          case "carps":
+          case "ca-rps":
+            window.location.href = "https://hazelthecolor.github.io/helper/carps";
+            break;
+          
+          case "posres":
+            window.location.href = "https://hazelthecolor.github.io/helper/posres";
+            break;
+          
+          case "fmc":
+            window.location.href = "https://hazelthecolor.github.io/helper/fmc";
+            break;
+          
+          default:
+            window.location.href = "https://hazelthecolor.github.io/...?";
+        }
       }
     </script>
 

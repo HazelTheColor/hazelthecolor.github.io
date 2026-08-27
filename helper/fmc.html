@@ -77,11 +77,12 @@
       }
 
       #bg-text {
-        color: #5c618e;
+        color: #6b266a;
         font-size: 30px;
-        font-family: Cousine;
+        font-family: Cousine, 'Courier New', monospace;
+        font-weight: bold;
         text-align: left;
-        line-height: 60px;
+        line-height: 80px;
 
         margin: 0px;
         padding: 0px;
@@ -89,124 +90,214 @@
         width: 1081px;
         position: absolute;
       }
+
+      #morse-text {
+        color: #5d6277;
+        font-size: 30px;
+        font-family: Cousine, 'Courier New', monospace;
+        text-align: left;
+        overflow-wrap: break-word;
+        line-height: 80px;
+
+        margin: 0px;
+        padding: 0px;
+        top: 350px;
+        width: 1081px;
+        position: absolute;
+      }
     </style>
     <body>
-      <input id="read">
+      <input autocomplete="off" id="read">
       <div id="letters-div">
-        <input class="letter" name="0" placeholder="a" maxlength="1">
-        <input class="letter" name="1" placeholder="b" maxlength="1">
-        <input class="letter" name="2" placeholder="c" maxlength="1">
-        <input class="letter" name="3" placeholder="d" maxlength="1">
-        <input class="letter" name="4" placeholder="e" maxlength="1">
-        <input class="letter" name="5" placeholder="f" maxlength="1">
-        <input class="letter" name="6" placeholder="g" maxlength="1">
-        <input class="letter" name="7" placeholder="h" maxlength="1">
-        <input class="letter" name="8" placeholder="i" maxlength="1">
-        <input class="letter" name="9" placeholder="j" maxlength="1">
-        <input class="letter" name="10" placeholder="k" maxlength="1">
-        <input class="letter" name="11" placeholder="l" maxlength="1">
-        <input class="letter" name="12" placeholder="m" maxlength="1">
-        <input class="letter" name="13" placeholder="n" maxlength="1">
-        <input class="letter" name="14" placeholder="o" maxlength="1">
-        <input class="letter" name="15" placeholder="p" maxlength="1">
-        <input class="letter" name="16" placeholder="q" maxlength="1">
-        <input class="letter" name="17" placeholder="r" maxlength="1">
-        <input class="letter" name="18" placeholder="s" maxlength="1">
-        <input class="letter" name="19" placeholder="t" maxlength="1">
-        <input class="letter" name="20" placeholder="u" maxlength="1">
-        <input class="letter" name="21" placeholder="v" maxlength="1">
-        <input class="letter" name="22" placeholder="w" maxlength="1">
-        <input class="letter" name="23" placeholder="x" maxlength="1">
-        <input class="letter" name="24" placeholder="y" maxlength="1">
-        <input class="letter" name="25" placeholder="z" maxlength="1">
+        <input class="letter" autocomplete="off" name="0" placeholder="a" maxlength="1">
+        <input class="letter" autocomplete="off" name="1" placeholder="b" maxlength="1">
+        <input class="letter" autocomplete="off" name="2" placeholder="c" maxlength="1">
+        <input class="letter" autocomplete="off" name="3" placeholder="d" maxlength="1">
+        <input class="letter" autocomplete="off" name="4" placeholder="e" maxlength="1">
+        <input class="letter" autocomplete="off" name="5" placeholder="f" maxlength="1">
+        <input class="letter" autocomplete="off" name="6" placeholder="g" maxlength="1">
+        <input class="letter" autocomplete="off" name="7" placeholder="h" maxlength="1">
+        <input class="letter" autocomplete="off" name="8" placeholder="i" maxlength="1">
+        <input class="letter" autocomplete="off" name="9" placeholder="j" maxlength="1">
+        <input class="letter" autocomplete="off" name="10" placeholder="k" maxlength="1">
+        <input class="letter" autocomplete="off" name="11" placeholder="l" maxlength="1">
+        <input class="letter" autocomplete="off" name="12" placeholder="m" maxlength="1">
+        <input class="letter" autocomplete="off" name="13" placeholder="n" maxlength="1">
+        <input class="letter" autocomplete="off" name="14" placeholder="o" maxlength="1">
+        <input class="letter" autocomplete="off" name="15" placeholder="p" maxlength="1">
+        <input class="letter" autocomplete="off" name="16" placeholder="q" maxlength="1">
+        <input class="letter" autocomplete="off" name="17" placeholder="r" maxlength="1">
+        <input class="letter" autocomplete="off" name="18" placeholder="s" maxlength="1">
+        <input class="letter" autocomplete="off" name="19" placeholder="t" maxlength="1">
+        <input class="letter" autocomplete="off" name="20" placeholder="u" maxlength="1">
+        <input class="letter" autocomplete="off" name="21" placeholder="v" maxlength="1">
+        <input class="letter" autocomplete="off" name="22" placeholder="w" maxlength="1">
+        <input class="letter" autocomplete="off" name="23" placeholder="x" maxlength="1">
+        <input class="letter" autocomplete="off" name="24" placeholder="y" maxlength="1">
+        <input class="letter" autocomplete="off" name="25" placeholder="z" maxlength="1">
       </div>
       <img src="../graphics/fmc_alphabet.png" style="top: 230px; position: absolute">
       <p id="bg-text"></p>
+      <p id="morse-text"></p>
     </body>
 
     <script>
         const output = document.getElementById("bg-text");
-
+        const outmorse = document.getElementById("morse-text");
         const letters = [
             '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 
             '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 
             '-', '-', '-', '-', '-', '-'
         ]
-        let valid = true;
+        let morseText = '';
 
         const d = document.querySelectorAll('#letters-div input');
-        d.forEach((input) => {
-            input.addEventListener('input', (event) => {
-                valid = true;
+        const inputs = Array.from(d);
 
-                const val = event.target.value.toUpperCase().replace(/[^A-Z]/g, '');
-                event.target.value = val;
+        // focus shenanigans
+        inputs.forEach((input, i) => {
+            input.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowRight') {
+                    const nextInput = inputs[(i + 1) % inputs.length];
+                    nextInput.focus();
 
-                const indx = event.target.name;
+                } else if (event.key === 'ArrowLeft') {
+                    const prevInput = inputs[(i - 1 + inputs.length) % inputs.length];
+                    prevInput.focus();
 
-                if (letters.includes(val)) {
-                    valid = false;
-                    output.innerHTML = 'duplicates :P';
-                } else if (val === '') {
-                    letters[indx] = '-';
-                    writeToScreen();
-                } else {
-                    letters[indx] = val;
-                    writeToScreen();
+                } else if (event.key === 'Backspace') {
+                    const prevInput = inputs[(i - 1 + inputs.length) % inputs.length];
+                    prevInput.focus();
+                    prevInput.value = '';
+                    checkInputs();
                 }
+            });
+            input.addEventListener('input', (event) => {
+                const nextInput = inputs[(i < 25) ? i+1 : i];
+                nextInput.focus();
             });
         });
 
+        // check duplicates upon input
+        d.forEach((input) => {
+            input.addEventListener('input', checkInputs);
+        });
+
+        function checkInputs() {
+            const values = inputs.map(i => i.value.toUpperCase().replace(/[^A-Z]/g, ''));
+
+            const dupes = values.filter((val, index) => val !== '' && values.indexOf(val) !== index);
+
+            if (dupes.length > 0) {
+                output.innerHTML = 'duplicates :P';
+                outmorse.innerHTML = '';
+            } else {
+                values.forEach((val, i) => {letters[i] = val || '-'}); // sync with array
+                writeToScreen();
+            }
+        }
+
         const inputbox = document.getElementById("read");
         inputbox.addEventListener('input', (event) => {
-            writeToScreen();
+            checkInputs();
         });
+
+
 
         const dotImg = '<img src="../graphics/fmc_text_dot.png">';
         const dashImg = '<img src="../graphics/fmc_text_dash.png">';
         const slashImg = '<img src="../graphics/fmc_text_slash.png">';
 
         function writeToScreen() {
-            if (valid) {
-                const inputtxt = inputbox.value;
-                let txt = '';
-                for (let i = 0; i < inputtxt.length; i++) {
-                    const char = inputtxt[i].toUpperCase();
-                    if (!letters.includes(char)) {
-                        txt = txt + '&nbsp' + char + ' ';
+            const inputtxt = inputbox.value;
+            let txt = '';
+            let morse = '';
+            for (let i = 0; i < inputtxt.length; i++) {
+                const char = inputtxt[i].toUpperCase();
+                if (!letters.includes(char)) {
+                    txt = txt + '&nbsp' + char + ' ';
+                    morse = morse + '&nbsp&nbsp&nbsp';
+                } else {
+                    const index = letters.indexOf(char);
+
+                    // first char
+                    if ([0, 1, 2, 3, 4, 5, 6, 7, 8].includes(index)) {
+                        txt += dotImg;
+                        morse += '.';
+                    } else if ([9, 10, 11, 12, 13, 14, 15, 16, 17].includes(index)) {
+                        txt += dashImg;
+                        morse += '-';
                     } else {
-                        const index = letters.indexOf(char);
+                        txt += slashImg;
+                        morse += '/';
+                    }
 
-                        // first char
-                        if ([0, 1, 2, 3, 4, 5, 6, 7, 8].includes(index)) {
-                            txt += dotImg;
-                        } else if ([9, 10, 11, 12, 13, 14, 15, 16, 17].includes(index)) {
-                            txt += dashImg;
-                        } else {
-                            txt += slashImg;
-                        }
-
-                        // second char
-                        if ([0, 1, 2, 9, 10, 11, 18, 19, 20].includes(index)) {
-                            txt += dotImg;
-                        } else if ([3, 4, 5, 12, 13, 14, 21, 22, 23].includes(index)) {
-                            txt += dashImg;
-                        } else {
-                            txt += slashImg;
-                        }
-                        
-                        // third char
-                        if ([0, 3, 6, 9, 12, 15, 18, 21, 24].includes(index)) {
-                            txt += dotImg;
-                        } else if ([1, 4, 7, 10, 13, 16, 19, 22, 25].includes(index)) {
-                            txt += dashImg;
-                        } else {
-                            txt += slashImg;
-                        }
+                    // second char
+                    if ([0, 1, 2, 9, 10, 11, 18, 19, 20].includes(index)) {
+                        txt += dotImg;
+                        morse += '.';
+                    } else if ([3, 4, 5, 12, 13, 14, 21, 22, 23].includes(index)) {
+                        txt += dashImg;
+                        morse += '-';
+                    } else {
+                        txt += slashImg;
+                        morse += '/';
+                    }
+                    
+                    // third char
+                    if ([0, 3, 6, 9, 12, 15, 18, 21, 24].includes(index)) {
+                        txt += dotImg;
+                        morse += '.';
+                    } else if ([1, 4, 7, 10, 13, 16, 19, 22, 25].includes(index)) {
+                        txt += dashImg;
+                        morse += '-';
+                    } else {
+                        txt += slashImg;
+                        morse += '/';
                     }
                 }
-                output.innerHTML = txt;
             }
+            output.innerHTML = txt;
+            morseText = morse;
+            translateMorse()
+        }
+    </script>
+    <script>
+        // help ;-;
+        const morseDict = {
+            '.-':   '&nbspA',
+            '-...': '&nbspB&nbsp&nbsp',
+            '-.-.': '&nbspC&nbsp&nbsp', 
+            '-..':  '&nbspD&nbsp', 
+            '.':    'E',
+            '..-.': '&nbspF&nbsp&nbsp', 
+            '--.':  '&nbspG&nbsp', 
+            '....': '&nbspH&nbsp&nbsp', 
+            '..':   '&nbspI', 
+            '.---': '&nbspJ&nbsp&nbsp',
+            '-.-':  '&nbspK&nbsp', 
+            '.-..': '&nbspL&nbsp&nbsp', 
+            '--':   '&nbspM', 
+            '-.':   '&nbspN', 
+            '---':  '&nbspO&nbsp', 
+            '.--.': '&nbspP&nbsp&nbsp',
+            '--.-': '&nbspQ&nbsp&nbsp', 
+            '.-.':  '&nbspR&nbsp', 
+            '...':  '&nbspS&nbsp', 
+            '-':    'T', 
+            '..-':  '&nbspU&nbsp', 
+            '...-': '&nbspV&nbsp&nbsp',
+            '.--':  '&nbspW&nbsp', 
+            '-..-': '&nbspX&nbsp&nbsp', 
+            '-.--': '&nbspY&nbsp&nbsp', 
+            '--..': '&nbspZ&nbsp&nbsp'
+        }
+
+        // regex :sob:
+        function translateMorse() {
+            out1 = morseText.replace(/(?<=^|\/)([.-]+)(?=\/|$)/g, m => morseDict[m] || m);
+            out2 = out1.replace(/[-.\/]+/g, n => '&nbsp'.repeat(n.length))
+            outmorse.innerHTML = out2;
         }
     </script>
   </html>

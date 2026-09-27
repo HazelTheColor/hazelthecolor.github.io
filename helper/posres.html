@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="icon" href="../graphics/star.ico">
       <title>sevenfour.ogg</title>
+      <script src="_useful.js"></script>
     </head>
     
     <style id="style">
@@ -113,78 +114,25 @@
         <input id="base1" autocomplete="off" maxlength="4" placeholder="94">
         <input id="base2" autocomplete="off" maxlength="4" placeholder="10">
         <input id="inputstring" autocomplete="off">
-        <button id="convert" onclick="baseConvert()">(✿◠‿◠)</button>
+        <button id="convert" onclick="start()">(✿◠‿◠)</button>
         <p id="output" class="text">:3</p>
         <button id="copy" onclick="copyText()"></button>
       </div>
     </body>
 
     <script>
-        function baseConvert() {
+        function start() {
             const fromBase = parseInt(document.getElementById("base1").value);
             const toBase = parseInt(document.getElementById("base2").value);
             const input = document.getElementById("inputstring").value;
-            const l = input.length;
 
-            const symbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", 
-                            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
-                            "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
-                            "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", 
-                            "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", 
-                            "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", 
-                            "y", "z", "!", "@", "#", "$", "%", "^", "&", "*", 
-                            "(", ")", "_", "-", "+", "=", "|", "\\", "{", "}", 
-                            ':', ";", '"', "'", "<", ">", ",", ".", "?", "/", 
-                            "~", "[", "]", "`"]
-            
-            const allowedSymbols = symbols.slice(0, fromBase);
+            let o = baseConvert(fromBase, toBase, input);
 
-            if (isNaN(fromBase) || isNaN(toBase) || fromBase < 2 || fromBase > 94 || toBase < 1 || toBase > 94) {
-                window.location.href = "https://hazelthecolor.github.io/...?";
-            }
-
-            if (l === 0) {
-                document.getElementById("output").textContent = "(._ .)";
-                return;
-            }
-
-            let n = 0n;
-            // converting from start to base10
-            for (let i = 0; i < l; i++) {
-
-                if (!allowedSymbols.includes(input[i])) {
-                    document.getElementById("output").textContent = "(. _.)";
-                    return;
-                }
-
-                val = BigInt(symbols.indexOf(input[i]));
-                n = n * BigInt(fromBase) + val;
-            }
-
-            let out = "";
-
-            //base1 check
-            if (toBase === 1) {
-                out = '/'.repeat(Number(n));
-                document.getElementById("output").textContent = out;
-                return;
-            }
-
-            if (n === 0n) {
-                out = "0";
+            if (o == "error") {
+              window.location.href = "https://hazelthecolor.github.io/...?";
             } else {
-                const toBaseBI = BigInt(toBase);
-                let temp = n;
-                let digits = [];
-
-                while (temp > 0n) {
-                  digits.push(symbols[Number(temp % toBaseBI)]);
-                  temp = temp / toBaseBI;
-                }
-                out = digits.reverse().join('');
+              document.getElementById("output").innerHTML = o;
             }
-
-            document.getElementById("output").textContent = out;
         }
 
         function copyText() {

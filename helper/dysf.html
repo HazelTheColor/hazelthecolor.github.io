@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" href="../graphics/star.ico">
+      <title>sevenfour.ogg</title>
+      <script src="_useful.js"></script>
+      <script src="_dysf.js"></script>
+    </head>
+    
+    <style id="style">
+      body {
+        background-color: #151515;
+        font-family: Helvetica;
+        margin: 0;
+        padding: 0;
+        
+        display: flex;
+        justify-content: center;
+        height: 100dvh;
+      }
+
+      input {
+        background-color: #2e295a;
+      }
+      
+      input:hover {
+        background-color: #35476a;
+      }
+
+      #input1, #input2 {
+        color: #cccccc;
+        font-size: 24px;
+        text-align: center;
+
+        margin: 0px;
+        border: 2px solid #cccccc;
+        outline: none;
+        box-sizing: border-box;
+
+        width: 100px;
+        height: 40px;
+
+        position: absolute;
+      }
+
+      #input1 {
+        left: 0px;
+      }
+
+      #input2 {
+        right: 0px;
+      }
+
+      #output-div {
+        overflow-y: auto;
+        font-size: 20px;
+
+        width: 500px;
+        height: 300px;
+        top: 300px;
+        position: absolute;
+      }
+
+      .row {
+        width: 450px;
+        height: 20px;
+        left: 25px;
+        padding: 2px 0px 2px 0px;
+        position: relative;
+
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .text-light {
+        color: #cccccc;
+      }
+
+      .text-dark {
+        color: #91a2c3;
+      }
+    </style>
+
+    <body>
+      <div style="width: 500px; justify-content: center; display: flex;">
+        <div style="width: 300px; height: 40px; top: 200px; position: absolute">
+          <input id="input1" autocomplete="off" maxlength="5" placeholder="a">
+          <input id="input2" autocomplete="off" maxlength="5" placeholder="b">
+        </div>
+        <div id="output-div">
+        </div>
+      </div>
+    </body>
+    <script>
+      function calc(in1, in2) {
+        const container = document.getElementById("output-div");
+        container.innerHTML = "";
+
+        for (let i = 0; i < 36; i++) {
+          const code = Math.floor(i / 6).toString() + (i % 6).toString();
+          let a = func(in1, in2, code);
+
+          const row = document.createElement("div");
+          row.classList.add("row");
+          if (i % 2 == 0) {
+            row.classList.add("text-light");
+          } else {
+            row.classList.add("text-dark");
+          }
+
+          const lspan = document.createElement("span");
+          lspan.innerText = `#${code}`;
+          const rspan = document.createElement("span");
+          rspan.innerText = a;
+
+          row.appendChild(lspan);
+          row.appendChild(rspan);
+          container.appendChild(row);
+        }
+      }
+    </script>
+    <script>
+      const input1 = document.getElementById("input1");
+      const input2 = document.getElementById("input2");
+      const container = document.getElementById("output-div");
+    
+      let in1 = '';
+      let in2 = '';
+
+      input1.addEventListener('input', () => {
+        input1.value = input1.value.replace(/[^0-5]/g, '');
+        in1 = input1.value;
+
+        if (in1 != '' && in2 != '') {
+          calc(in1, in2)
+        } else {
+          container.innerHTML = "";
+        }
+      });
+
+      input2.addEventListener('input', () => {
+        input2.value = input2.value.replace(/[^0-5]/g, '');
+        in2 = input2.value;
+
+        if (in1 != '' && in2 != '') {
+          calc(in1, in2)
+        } else {
+          container.innerHTML = "";
+        }
+      });
+    </script>
+  </html>

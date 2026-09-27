@@ -1,3 +1,5 @@
+console.log('loaded');
+
 function func(input1, input2, code) {
     let i1_10 = parseInt(baseConvert(6, 10, input1.toString()));
     let i2_10 = parseInt(baseConvert(6, 10, input2.toString()));

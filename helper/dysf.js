@@ -267,7 +267,7 @@ function func(input1, input2, code) {
             for (let i = 0; i < n; i++) {
                 s += (Math.abs(i1[i] - i2[i])).toString();
             }
-            output = baseConvert(10, 6, s);
+            output = s;
             break;
         }
 
@@ -389,7 +389,10 @@ function func(input1, input2, code) {
         }
 
         case "55": {
-            output = "i dont get it";
+            const ldr = digitalRoot(baseConvert(6, 36, input1), 36);
+            const rdr = digitalRoot(baseConvert(6, 36, input2), 36);
+            let s = ldr + rdr;
+            output = baseConvert(10, 6, s.toString());
             break;
         }
     }

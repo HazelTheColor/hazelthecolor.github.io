@@ -57,12 +57,12 @@ function baseConvert(fromBase, toBase, input) {
     return out;
 }
 
-// -- (Int, Int) -> (Int)
+// -- (String, Int) -> (Int_10)
 function digitalRoot(input, base) {
-    if (input == 0) {
+    if (input == '0') {
         return 0;
     } else {
-        const input_10 = parseInt(baseConvert(base, 10, input.toString()));
+        const input_10 = parseInt(baseConvert(base, 10, input));
         return 1 + ((input_10 - 1) % (base - 1));
     }
 }

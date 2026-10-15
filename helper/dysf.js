@@ -74,8 +74,8 @@ function func(input1, input2, code) {
         }
 
         case "11": {
-            let high = "";
-            let low = "";
+            let high = "0";
+            let low = "0";
             let str = input1.toString() + input2.toString()
             for (let i = 0; i < str.length; i++) {
                 if (str[i] == "0" || str[i] == "1" || str[i] == "2") {
@@ -384,7 +384,14 @@ function func(input1, input2, code) {
         }
 
         case "54": {
-            output = "what";
+            const i1 = baseConvert(6, 36, input1);
+            const i2 = baseConvert(6, 36, input2);
+            let str = i1 + i2;
+            let s = 0;
+            for (let i = 0; i < str.length; i++) {
+                s += parseInt(baseConvert(36, 10, str[i]));
+            }
+            output = baseConvert(10, 6, s.toString());
             break;
         }
 
@@ -396,5 +403,5 @@ function func(input1, input2, code) {
             break;
         }
     }
-    return output;
+    return String(Number(output));
 }

@@ -1,17 +1,33 @@
-// -- (Int, Int, String) -> (String)
+// -- (Int, Int, String, List[String], List[String]) -> (String)
 function baseConvert(fromBase, toBase, input) {
+    
     const l = input.length;
-    const symbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", 
-                    "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
-                    "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
-                    "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", 
-                    "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", 
-                    "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", 
-                    "y", "z", "!", "@", "#", "$", "%", "^", "&", "*", 
-                    "(", ")", "_", "-", "+", "=", "|", "\\", "{", "}", 
-                    ':', ";", '"', "'", "<", ">", ",", ".", "?", "/", 
-                    "~", "[", "]", "`"]
-    const allowedSymbols = symbols.slice(0, fromBase);
+    const b64 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
+                 "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
+                 "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", 
+                 "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", 
+                 "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", 
+                 "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", 
+                 "8", "9", "+", "/"];
+    
+    const b94 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", 
+                 "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
+                 "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
+                 "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", 
+                 "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", 
+                 "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", 
+                 "y", "z", "!", "@", "#", "$", "%", "^", "&", "*", 
+                 "(", ")", "_", "-", "+", "=", "|", "\\", "{", "}", 
+                 ':', ";", '"', "'", "<", ">", ",", ".", "?", "/", 
+                 "~", "[", "]", "`"];
+    
+    let fromSymbols = b94;
+    let toSymbols = b94;
+    // base64 uses a different alphabet for some reason
+    if (fromBase == 64) { fromSymbols = b64; }
+    if (toBase == 64) { toSymbols = b64; }
+
+    const allowedSymbols = fromSymbols.slice(0, fromBase);
 
     if (isNaN(fromBase) || isNaN(toBase) || fromBase < 2 || fromBase > 94 || toBase < 1 || toBase > 94) {
         return "error";
@@ -29,7 +45,7 @@ function baseConvert(fromBase, toBase, input) {
             return "(._ .)";
         }
 
-        val = BigInt(symbols.indexOf(input[i]));
+        const val = BigInt(fromSymbols.indexOf(input[i]));
         n = n * BigInt(fromBase) + val;
     }
 
@@ -49,7 +65,7 @@ function baseConvert(fromBase, toBase, input) {
         let digits = [];
 
         while (temp > 0n) {
-            digits.push(symbols[Number(temp % toBaseBI)]);
+            digits.push(toSymbols[Number(temp % toBaseBI)]);
             temp = temp / toBaseBI;
         }
         out = digits.reverse().join('');
